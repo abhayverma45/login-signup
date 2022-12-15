@@ -1,4 +1,4 @@
-// import * as React from "react";
+ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useContext, useState } from "react";
 import Login from "./Login";
 import { GlobalState } from "../GlobalState";
-import  Buttonstyle  from "./buttonstyle2" 
+
 
 function Copyright(props) {
   return (
@@ -38,6 +38,21 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const [user, setuser] = React.useState({
+    email: "",
+    password: "",
+    fname:"",
+    lname:""
+  });
+  const hinp = (e)=>{
+     const {name,value} = e.target;
+     setuser((prev)=>{
+       return {
+         ...prev,
+         [name]:value
+       }
+     })
+  }
   const state = useContext(GlobalState);
   const [loginstate, setLoginstate] = state.loginstate;
   const handleSubmit = (event) => {
@@ -51,7 +66,10 @@ export default function SignUp() {
   // const [callback,setCallback]=callback1;
   const [login, setLogin] = useState(false);
   const handleSubmit2 = () => {
-    alert("Registration Successful!");
+   const {email,password,fname,lname} = user;
+   if(email.length===0||password.length==0||fname.length===0,lname.length===0) {
+     return alert("Pls fill all fields")
+   }
     setLoginstate(true);
     localStorage.setItem("firstLogin", true);
   };
@@ -98,7 +116,9 @@ export default function SignUp() {
                   <Grid item xs={12} sm={6}>
                     <TextField
                       autoComplete="given-name"
-                      name="firstName"
+                      name="fname"
+                      value={user.fname}
+                      onChange={hinp}
                       required
                       fullWidth
                       id="firstName"
@@ -112,7 +132,9 @@ export default function SignUp() {
                       fullWidth
                       id="lastName"
                       label="Last Name"
-                      name="lastName"
+                      name="lname"
+                      value={user.lname}
+                      onChange={hinp}
                       autoComplete="family-name"
                     />
                   </Grid>
@@ -123,6 +145,8 @@ export default function SignUp() {
                       id="email"
                       label="Email Address"
                       name="email"
+                      value={user.email}
+                      onChange={hinp}
                       autoComplete="email"
                     />
                   </Grid>
@@ -131,6 +155,8 @@ export default function SignUp() {
                       required
                       fullWidth
                       name="password"
+                      value={user.password}
+                      onChange={hinp}
                       label="Password"
                       type="password"
                       id="password"
@@ -155,7 +181,7 @@ export default function SignUp() {
                     handleSubmit2();
                   }}
                 >
-                 <Buttonstyle/>
+                 Sign Up
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>

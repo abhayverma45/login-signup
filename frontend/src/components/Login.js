@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { GlobalState } from "../GlobalState";
-import Buttonstyle from "./buttonstyle";
+
 
 function Copyright(props) {
   return (
@@ -36,10 +36,14 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [user, setuser] = React.useState({
+    email: "",
+    password: "",
+  });
   const state = React.useContext(GlobalState);
   const [loginstate, setLoginstate] = state.loginstate;
   const handleSubmit = (event) => {
-    event.preventDefault();
+    
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
@@ -47,7 +51,10 @@ export default function SignIn() {
     });
   };
   const handleSubmit2 = () => {
-    alert("Login Successful!");
+   console.log(user.email.length)
+    if ((user.email.length === 0) || (user.password.length === 0)){
+      return alert("Please fill all fields");}
+    
     localStorage.setItem("firstLogin", true);
     setLoginstate(true);
   };
@@ -81,7 +88,18 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
+              value={user.email}
               label="Email Address"
+              onChange={(e) => {
+                setuser((prev) => {
+                  console.log(prev)
+                  return {
+                    ...prev,
+                    ["email"]:e.target.value,
+                  };
+                 
+                });
+              }}
               name="email"
               autoComplete="email"
               autoFocus
@@ -94,6 +112,16 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
+              value={user.password}
+              onChange={(e) => {
+                setuser((prev) => {
+                  console.log(prev)
+                  return {
+                    ...prev,
+                    ["password"]:e.target.value,
+                  };
+                });
+              }}
               autoComplete="current-password"
             />
             <FormControlLabel
@@ -109,7 +137,7 @@ export default function SignIn() {
                 handleSubmit2();
               }}
             >
-              <Buttonstyle />
+              Log in
             </Button>
             <Grid container>
               <Grid item xs>

@@ -8,14 +8,14 @@ const footer = () => {
   return (
     <div>
       <footer
-        class="text-center text-white fixed-bottom"
-        style={{ backgroundColor: "#21081a" }}
+        class="text-center text-white "
+        style={{ backgroundColor: "#b7b7a4"}}
       >
         <div class="container p-4"></div>
 
         <div
           class="text-center p-3"
-          style={{ backgroundColor: " rgba(0, 0, 0, 0.2)" }}
+          
         >
           This Web-App is made by : Abhay Verma
           <br />

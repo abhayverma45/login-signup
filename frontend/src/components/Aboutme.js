@@ -29,15 +29,16 @@ const About = () => {
                     exercise those skills."
                   </p>
                 </div>
+                <center>SKILLS</center>
 
                 <ul class="social-list">
                   <li>
-                    <i>REACT</i>
+                    <i>HTML,CSS,REACTJS,NODE.JS,EXPRESS.JS,MONGODB,BOOTSTRAP</i>
                   </li>
-                  <li>
-                    <i>NODEJS</i>
-                  </li>
-                  <li>
+                  {/* <li>
+                    <i>NODE.JS</i>
+                  </li> */}
+                  {/* <li>
                     <i>JAVA SCRIPT</i>
                   </li>
                   <li>
@@ -48,7 +49,7 @@ const About = () => {
                   </li>
                   <li>
                     <i>BOOTSTRAP</i>
-                  </li>
+                  </li> */}
                 </ul>
 
                 {/* <div class="buttons">
@@ -60,6 +61,9 @@ const About = () => {
           </div>
         </div>
       </div>
+      <br/>
+      <br/>
+      
       <Footer />
     </>
   );
