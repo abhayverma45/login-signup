@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { GlobalState } from "../GlobalState";
+import Buttonstyle from "./buttonstyle";
 
 function Copyright(props) {
   return (
@@ -34,6 +36,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const state = React.useContext(GlobalState);
+  const [loginstate, setLoginstate] = state.loginstate;
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -41,6 +45,11 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
+  };
+  const handleSubmit2 = () => {
+    alert("Login Successful!");
+    localStorage.setItem("firstLogin", true);
+    setLoginstate(true);
   };
 
   return (
@@ -96,8 +105,11 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => {
+                handleSubmit2();
+              }}
             >
-              Sign In
+              <Buttonstyle />
             </Button>
             <Grid container>
               <Grid item xs>

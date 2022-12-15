@@ -12,8 +12,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Login from "./Login";
+import { GlobalState } from "../GlobalState";
+import  Buttonstyle  from "./buttonstyle2" 
 
 function Copyright(props) {
   return (
@@ -24,7 +26,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://abhayverma45.github.io/portfolio/">
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -36,6 +38,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const state = useContext(GlobalState);
+  const [loginstate, setLoginstate] = state.loginstate;
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,13 +48,18 @@ export default function SignUp() {
       password: data.get("password"),
     });
   };
+  // const [callback,setCallback]=callback1;
   const [login, setLogin] = useState(false);
-
+  const handleSubmit2 = () => {
+    alert("Registration Successful!");
+    setLoginstate(true);
+    localStorage.setItem("firstLogin", true);
+  };
   return (
     <>
       {login ? (
         <>
-          <Login />
+          <Login  />
           <Link
             href="#"
             variant="body2"
@@ -142,8 +151,11 @@ export default function SignUp() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  onClick={() => {
+                    handleSubmit2();
+                  }}
                 >
-                  Sign Up
+                 <Buttonstyle/>
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
