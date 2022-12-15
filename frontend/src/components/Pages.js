@@ -15,7 +15,8 @@ const Pages = () => {
     <>
       {loginstate ? (
         <Routes>
-          <Route path="/" element={<SignUp />} />
+        <Route path="/" element={<SignUp />} />
+          <Route path="/login-signup-frontend/" element={<SignUp />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
           <Route path="/aboutme" element={<Aboutme />} />
@@ -25,6 +26,7 @@ const Pages = () => {
       ) : (
         <Routes>
           <Route path="/" element={<SignUp />} />
+          <Route path="/login-signup-frontend/" element={<SignUp />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
