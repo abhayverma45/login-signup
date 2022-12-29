@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 router.get("/", (req, res) => {
   res.send(`hello from the router`);
 });
@@ -33,33 +34,29 @@ router.post("/register", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
   try {
+    let token;
+
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: "please fill the fields" });
     }
     const userlogin = await User.findOne({ email: email });
     // console.log(userlogin);
-    if(userlogin){
-      const match =await bcrypt.compare(password,userlogin.password);
+    if (userlogin) {
+      const match = await bcrypt.compare(password, userlogin.password);
+      // jwt token
+      token = await userlogin.generateAuthToken();
+      console.log(token);
       if (!match) {
         res.status(400).json({ error: "error password" });
-      } else{
-         res.json({ message: "user signin successfully" });
+      } else {
+        res.json({ message: "user signin successfully" });
       }
-
-
-    }
-    else{
+    } else {
       res.status(400).json({ error: "email not matching" });
-
     }
-
-
-
-
 
     // matching login time password and atlas stored password
-   
   } catch (error) {
     console.log(error);
   }
